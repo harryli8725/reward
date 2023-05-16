@@ -3,6 +3,7 @@ import Table from "./Components/Table/rewardsTable";
 import SearchForm from "./Components/SearchForm/searchForm";
 import useFetch from "./Hooks/useFetch";
 import { fetchData } from "./Services/fetchTransactions";
+import { calculateTotalRewardPoints, formatDate } from "./Utils/helper";
 import "./App.css";
 
 const App = () => {
@@ -14,40 +15,55 @@ const App = () => {
   } = useFetch(fetchData);
 
   const [filteredTransactions, setFilteredTransactions] = useState([]);
+  const [totalRewardPoints, setTotalRewardPoints] = useState(0);
+
   const [query, setQuery] = useState({
     name: "",
-    date: "",
+    startDate: "",
+    endDate: "",
   });
 
   useEffect(() => {
     handleFetch();
   }, []);
 
+  const filterTransactions = (item, exactMatch = false) => {
+    const nameQuery = query.name.toLowerCase();
+    const startDateQuery = query.startDate;
+    const endDateQuery = query.endDate;
+
+    return item.transactions.filter((transaction) => {
+      const nameMatch = nameQuery
+        ? exactMatch
+          ? transaction.customerName.toLowerCase() === nameQuery
+          : transaction.customerName.toLowerCase().includes(nameQuery)
+        : true;
+
+      const transactionDate = new Date(formatDate(transaction.transactionDate));
+      const startDateMatch = startDateQuery
+        ? transactionDate >= new Date(startDateQuery)
+        : true;
+      const endDateMatch = endDateQuery
+        ? transactionDate <= new Date(endDateQuery)
+        : true;
+
+      return nameMatch && startDateMatch && endDateMatch;
+    });
+  };
+
   useEffect(() => {
-    if ((query.name !== "" || query.date !== "") && transactions !== null) {
+    if (transactions && (query.name || query.startDate || query.endDate)) {
       const filtered = transactions
-        .map((item) => {
-          const filteredTransactions = item.transactions.filter(
-            (transaction) => {
-              const nameMatch =
-                query.name !== ""
-                  ? transaction.customerName
-                      .toLowerCase()
-                      .includes(query.name.toLowerCase())
-                  : true;
-              const dateMatch =
-                query.date !== ""
-                  ? transaction.transactionDate === query.date
-                  : true; // Allow all transactions if query date is empty
+        .map((item) => ({ ...item, transactions: filterTransactions(item) }))
+        .filter((item) => item.transactions.length > 0);
 
-              return nameMatch && dateMatch;
-            }
-          );
+      const exactMatchedTransactions = transactions.flatMap((item) =>
+        filterTransactions(item, true)
+      );
 
-          return { ...item, transactions: filteredTransactions };
-        })
-        .filter((item) => item.transactions.length > 0); // Remove items with no transactions after filtering
+      const totalPoints = calculateTotalRewardPoints(exactMatchedTransactions);
 
+      setTotalRewardPoints(totalPoints);
       setFilteredTransactions(filtered);
     } else {
       setFilteredTransactions(transactions);
@@ -75,6 +91,13 @@ const App = () => {
             <SearchForm query={query} setQuery={setQuery} />
           </div>
         </div>
+
+        {query.name && totalRewardPoints > 0 ? (
+          <h4 className="rewardPoint">
+            Total Reward Points: {totalRewardPoints}
+          </h4>
+        ) : null}
+
         {filteredTransactions ? (
           <Table data={filteredTransactions} />
         ) : (

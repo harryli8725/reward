@@ -11,15 +11,15 @@ const SearchForm = ({ query, setQuery }) => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    // handle form submit here
   };
 
-  // const handleFormClear = () => {
-  //   setQuery({
-  //     name: "",
-  //     date: "",
-  //   });
-  // };
+  const handleFormClear = () => {
+    setQuery({
+      name: "",
+      startDate: "",
+      endDate: "",
+    });
+  };
 
   return (
     <form className="search-form" onSubmit={handleFormSubmit}>
@@ -27,42 +27,52 @@ const SearchForm = ({ query, setQuery }) => {
         <label className="search-form__label" htmlFor="name">
           Customer Name:
         </label>
-        <input
-          className="search-form__input"
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Enter customer name"
-          value={query.name}
-          onChange={handleInputChange}
-        />
+        <div className="tooltip">
+          <input
+            className="search-form__input"
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter customer name"
+            value={query.name}
+            onChange={handleInputChange}
+          />
+          <span className="tooltiptext">
+            Enter full name to view total points
+          </span>
+        </div>
       </div>
       <div className="search-form__field">
-        <label className="search-form__label" htmlFor="date">
-          Transaction Date:
+        <label className="search-form__label" htmlFor="startDate">
+          Start Date:
         </label>
         <input
           className="search-form__input"
           type="date"
-          id="date"
-          name="date"
-          placeholder="Enter transaction date"
-          value={query.date}
+          id="startDate"
+          name="startDate"
+          placeholder="Enter start date"
+          value={query.startDate}
           onChange={handleInputChange}
         />
       </div>
-      {/* <div className="search-form__field">
-        <button className="search-form__button" type="submit">
-          Search
-        </button>
-        <button
-          className="search-form__button"
-          type="button"
-          onClick={handleFormClear}
-        >
-          Clear
-        </button>
-      </div> */}
+      <div className="search-form__field">
+        <label className="search-form__label" htmlFor="endDate">
+          End Date:
+        </label>
+        <input
+          className="search-form__input"
+          type="date"
+          id="endDate"
+          name="endDate"
+          placeholder="Enter end date"
+          value={query.endDate}
+          onChange={handleInputChange}
+        />
+      </div>
+      <button type="button" onClick={handleFormClear}>
+        Clear
+      </button>
     </form>
   );
 };
