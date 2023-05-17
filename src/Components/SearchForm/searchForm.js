@@ -9,10 +9,6 @@ const SearchForm = ({ query, setQuery }) => {
     });
   };
 
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
-  };
-
   const handleFormClear = () => {
     setQuery({
       name: "",
@@ -22,7 +18,7 @@ const SearchForm = ({ query, setQuery }) => {
   };
 
   return (
-    <form className="search-form" onSubmit={handleFormSubmit}>
+    <form className="search-form">
       <div className="search-form__field">
         <label className="search-form__label" htmlFor="name">
           Customer Name:

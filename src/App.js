@@ -72,8 +72,8 @@ const App = () => {
 
   if (isLoading) {
     return (
-      <div className="loader-container">
-        <div className="loader"></div>
+      <div className="loader-container" data-testid="loader-container">
+        <div className="loader" data-testid="loader"></div>
       </div>
     );
   }
