@@ -1,4 +1,4 @@
-export function groupbyDate(data) {
+export function groupbyYearMonth(data) {
   const groupedData = data.reduce((acc, curr) => {
     const yearMonth = curr.transactionDate.substr(0, 7);
     const index = acc.findIndex((item) => item.yearMonth === yearMonth);
@@ -29,8 +29,4 @@ export function calculateRewardPoints(amount) {
   } else {
     return (amount - 100) * 2 + 50;
   }
-}
-
-export function formatDate(date) {
-  return new Date(date).toISOString().split("T")[0];
 }

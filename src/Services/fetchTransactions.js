@@ -1,4 +1,4 @@
-import { groupbyDate } from "../Utils/helper";
+import { groupbyYearMonth } from "../Utils/helper";
 
 const transactions = [
   {
@@ -278,7 +278,7 @@ const transactions = [
 export function fetchData() {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve(groupbyDate(transactions));
+      resolve(groupbyYearMonth(transactions));
     }, 1000);
   });
 }

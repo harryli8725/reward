@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./style.css";
+import "./rewardsTable.css";
 
 const Table = ({ data }) => {
   const [sortColumn, setSortColumn] = useState(null);

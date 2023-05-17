@@ -1,5 +1,5 @@
 import React from "react";
-import "./style.css";
+import "./searchForm.css";
 
 const SearchForm = ({ query, setQuery }) => {
   const handleInputChange = (event) => {

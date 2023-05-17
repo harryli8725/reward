@@ -3,7 +3,7 @@ import { render, waitFor, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
 import useFetch from "./Hooks/useFetch";
-import { groupbyDate } from "./Utils/helper";
+import { groupbyYearMonth } from "./Utils/helper";
 
 jest.mock("./Hooks/useFetch");
 jest.mock("./Services/fetchTransactions");
@@ -74,7 +74,7 @@ describe("App Component", () => {
       },
     ];
 
-    const groupedData = groupbyDate(dummyData);
+    const groupedData = groupbyYearMonth(dummyData);
 
     useFetch.mockReturnValue({
       data: groupedData,
@@ -118,7 +118,7 @@ describe("App Component", () => {
       },
     ];
 
-    const groupedData = groupbyDate(dummyData);
+    const groupedData = groupbyYearMonth(dummyData);
 
     useFetch.mockReturnValue({
       data: groupedData,

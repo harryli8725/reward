@@ -3,7 +3,7 @@ import Table from "./Components/Table/rewardsTable";
 import SearchForm from "./Components/SearchForm/searchForm";
 import useFetch from "./Hooks/useFetch";
 import { fetchData } from "./Services/fetchTransactions";
-import { calculateTotalRewardPoints, formatDate } from "./Utils/helper";
+import { calculateTotalRewardPoints } from "./Utils/helper";
 import "./App.css";
 
 const App = () => {
@@ -39,7 +39,7 @@ const App = () => {
           : transaction.customerName.toLowerCase().includes(nameQuery)
         : true;
 
-      const transactionDate = new Date(formatDate(transaction.transactionDate));
+      const transactionDate = new Date(transaction.transactionDate);
       const startDateMatch = startDateQuery
         ? transactionDate >= new Date(startDateQuery)
         : true;
