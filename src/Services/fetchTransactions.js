@@ -282,9 +282,3 @@ export function fetchData() {
     }, 1000);
   });
 }
-
-export function fetchDatabyName(name) {
-  return transactions.filter(
-    (transaction) => transaction.customerName === name
-  );
-}
