@@ -1,4 +1,4 @@
-export function groupbyData(data) {
+export function groupbyDate(data) {
   const groupedData = data.reduce((acc, curr) => {
     const yearMonth = curr.transactionDate.substr(0, 7);
     const index = acc.findIndex((item) => item.yearMonth === yearMonth);

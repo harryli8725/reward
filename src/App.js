@@ -76,9 +76,7 @@ const App = () => {
         <div className="loader" data-testid="loader"></div>
       </div>
     );
-  }
-
-  if (error) {
+  } else if (error) {
     return <span>something went wrong</span>;
   }
 
