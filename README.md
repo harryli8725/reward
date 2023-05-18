@@ -5,7 +5,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 To run the project locally, please follow the steps below:
 
 ### `Prerequisites`
-Make sure you have Node.js Version 18 installed on your machine.
+Make sure you have Node.js Version 19 installed on your machine.
 
 ### `Installation`
 1. Clone the repository or download the source code.
