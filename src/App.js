@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Table from "./Components/Table/rewardsTable";
 import SearchForm from "./Components/SearchForm/searchForm";
 import useFetch from "./Hooks/useFetch";
-import { fetchData } from "./Services/fetchTransactions";
+import { fetchData } from "./API/fetchTransactions";
 import { calculateTotalRewardPoints } from "./Utils/helper";
 import "./App.css";
 
