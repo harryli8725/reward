@@ -5,8 +5,8 @@ import App from "../App";
 import useFetch from "../Hooks/useFetch";
 import { groupbyYearMonth } from "../Utils/helper";
 
-jest.mock("../Hooks/useFetch");
 jest.mock("../API/fetchTransactions");
+jest.mock("../Hooks/useFetch");
 
 describe("App Component", () => {
   test("renders App component", async () => {

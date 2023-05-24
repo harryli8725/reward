@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { fetchData } from "./API/fetchTransactions";
 import Table from "./Components/Table/rewardsTable";
 import SearchForm from "./Components/SearchForm/searchForm";
 import useFetch from "./Hooks/useFetch";
-import { fetchData } from "./API/fetchTransactions";
 import { calculateTotalRewardPoints } from "./Utils/helper";
 import "./App.css";
 
