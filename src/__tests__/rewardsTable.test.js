@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
-import Table from "./rewardsTable";
+import Table from "../Components/Table/rewardsTable";
 
 const mockData = [
   {

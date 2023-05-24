@@ -1,5 +1,5 @@
 import { render, waitFor, screen } from "@testing-library/react";
-import useFetch from "./useFetch";
+import useFetch from "../Hooks/useFetch";
 import React, { useEffect } from "react";
 
 test("useFetch performs a fetch and sets the data", async () => {

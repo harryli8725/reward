@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
-import SearchForm from "./searchForm";
+import SearchForm from "../Components/SearchForm/searchForm";
 
 const mockQuery = {
   name: "",

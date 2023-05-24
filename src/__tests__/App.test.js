@@ -1,12 +1,12 @@
 import React from "react";
 import { render, waitFor, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import App from "./App";
-import useFetch from "./Hooks/useFetch";
-import { groupbyYearMonth } from "./Utils/helper";
+import App from "../App";
+import useFetch from "../Hooks/useFetch";
+import { groupbyYearMonth } from "../Utils/helper";
 
-jest.mock("./Hooks/useFetch");
-jest.mock("./Services/fetchTransactions");
+jest.mock("../Hooks/useFetch");
+jest.mock("../Services/fetchTransactions");
 
 describe("App Component", () => {
   test("renders App component", async () => {
