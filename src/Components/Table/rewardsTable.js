@@ -10,6 +10,7 @@ const Table = ({ data }) => {
     { title: "Customer Name", field: "customerName", sortable: false },
     { title: "Transaction Date", field: "transactionDate", sortable: true },
     { title: "Transaction Amount", field: "amount", sortable: true },
+    { title: "Reward Points", field: "points", sortable: false },
   ];
 
   const sortData = () => {
@@ -96,7 +97,7 @@ const Table = ({ data }) => {
           : sortData().map((group) => (
               <React.Fragment key={group.yearMonth}>
                 <tr className="table__row table__row--group">
-                  <td className="table__cell table__cell--group" colSpan="4">
+                  <td className="table__cell table__cell--group" colSpan="5">
                     {group.yearMonth}
                   </td>
                 </tr>
@@ -112,6 +113,7 @@ const Table = ({ data }) => {
                     <td className="table__cell">
                       {row.amount + " " + row.currency}
                     </td>
+                    <td className="table__cell">{row.points}</td>
                   </tr>
                 ))}
               </React.Fragment>

@@ -3,7 +3,10 @@ import { fetchData } from "./API/fetchTransactions";
 import Table from "./Components/Table/rewardsTable";
 import SearchForm from "./Components/SearchForm/searchForm";
 import useFetch from "./Hooks/useFetch";
-import { calculateTotalRewardPoints } from "./Utils/helper";
+import {
+  calculateTotalRewardPoints,
+  calculateRewardPoints,
+} from "./Utils/helper";
 import "./App.css";
 
 const App = () => {
@@ -54,19 +57,36 @@ const App = () => {
   useEffect(() => {
     if (transactions && (query.name || query.startDate || query.endDate)) {
       const filtered = transactions
-        .map((item) => ({ ...item, transactions: filterTransactions(item) }))
+        .map((item) => {
+          const itemTransactions = filterTransactions(item);
+          const transactionsWithPoints = itemTransactions.map(
+            (transaction) => ({
+              ...transaction,
+              points: calculateRewardPoints(transaction.amount),
+            })
+          );
+          return { ...item, transactions: transactionsWithPoints };
+        })
         .filter((item) => item.transactions.length > 0);
 
       const exactMatchedTransactions = transactions.flatMap((item) =>
         filterTransactions(item, true)
       );
-
       const totalPoints = calculateTotalRewardPoints(exactMatchedTransactions);
 
       setTotalRewardPoints(totalPoints);
       setFilteredTransactions(filtered);
     } else {
-      setFilteredTransactions(transactions);
+      if (transactions) {
+        const transactionsWithPoints = transactions.map((item) => ({
+          ...item,
+          transactions: item.transactions.map((transaction) => ({
+            ...transaction,
+            points: calculateRewardPoints(transaction.amount),
+          })),
+        }));
+        setFilteredTransactions(transactionsWithPoints);
+      }
     }
   }, [transactions, query]);
 
