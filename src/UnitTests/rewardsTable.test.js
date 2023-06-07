@@ -13,6 +13,7 @@ const mockData = [
         transactionDate: "2023-01-01T12:00:00-05:00",
         amount: 100.25,
         currency: "USD",
+        points: 50.5,
       },
       {
         transactionId: "6155120a12c4081234567891",
@@ -21,6 +22,7 @@ const mockData = [
         transactionDate: "2023-01-02T12:00:00-05:00",
         amount: 100.25,
         currency: "USD",
+        points: 50.5,
       },
     ],
   },
@@ -34,6 +36,7 @@ const mockData = [
         transactionDate: "2023-02-01T14:30:00-05:00",
         amount: 200,
         currency: "USD",
+        points: 250,
       },
     ],
   },
@@ -45,11 +48,12 @@ describe("Table component", () => {
 
     const headerElements = screen.getAllByRole("columnheader");
 
-    expect(headerElements).toHaveLength(4);
+    expect(headerElements).toHaveLength(5);
     expect(headerElements[0]).toHaveTextContent("Year-Month");
     expect(headerElements[1]).toHaveTextContent("Customer Name");
     expect(headerElements[2]).toHaveTextContent("Transaction Date");
     expect(headerElements[3]).toHaveTextContent("Transaction Amount");
+    expect(headerElements[4]).toHaveTextContent("Reward Points");
   });
 
   test("renders table rows correctly", () => {
@@ -58,11 +62,12 @@ describe("Table component", () => {
     const rowElements = screen.getAllByRole("row");
 
     expect(rowElements).toHaveLength(6);
-
+    console.log(rowElements[2]);
     expect(rowElements[1]).toHaveTextContent("2023-01");
     expect(rowElements[2]).toHaveTextContent("John Smith");
     expect(rowElements[2]).toHaveTextContent("1/1/2023 11:00:00 AM");
     expect(rowElements[2]).toHaveTextContent("100.25 USD");
+    expect(rowElements[2]).toHaveTextContent("50.5");
   });
 
   test("clicking on column headers toggles sort direction", async () => {
